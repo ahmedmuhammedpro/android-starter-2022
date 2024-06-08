@@ -1,4 +1,4 @@
-package eu.krzdabrowski.starter.basicfeature.presentation
+package eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets
 
 import android.os.Parcelable
 import androidx.compose.runtime.Immutable

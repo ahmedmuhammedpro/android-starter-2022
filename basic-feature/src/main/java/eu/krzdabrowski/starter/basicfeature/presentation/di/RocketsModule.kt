@@ -8,8 +8,8 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import eu.krzdabrowski.starter.basicfeature.presentation.composable.rocketdetails.RocketDetailsNavigationFactory
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsNavigationFactory
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsNavigationFactory
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsUiState
 import eu.krzdabrowski.starter.basicfeature.presentation.composable.rocketdetails.RocketDetailsUiState
 import eu.krzdabrowski.starter.core.navigation.NavigationFactory
 import javax.inject.Singleton

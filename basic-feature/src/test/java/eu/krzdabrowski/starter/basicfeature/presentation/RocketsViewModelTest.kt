@@ -5,9 +5,11 @@ import app.cash.turbine.test
 import eu.krzdabrowski.starter.basicfeature.domain.usecase.GetRocketsUseCase
 import eu.krzdabrowski.starter.basicfeature.domain.usecase.RefreshRocketsUseCase
 import eu.krzdabrowski.starter.basicfeature.generateTestRocketFromDomain
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsEvent.OpenWebBrowserWithDetails
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RefreshRockets
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RocketClicked
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsEvent.OpenWebBrowserWithDetails
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsIntent.RefreshRockets
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsIntent.RocketClicked
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsUiState
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsViewModel
 import eu.krzdabrowski.starter.basicfeature.presentation.mapper.toPresentationModel
 import eu.krzdabrowski.starter.core.utils.MainDispatcherExtension
 import io.mockk.MockKAnnotations

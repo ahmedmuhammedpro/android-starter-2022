@@ -1,4 +1,4 @@
-package eu.krzdabrowski.starter.basicfeature.presentation.composable
+package eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

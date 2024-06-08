@@ -1,4 +1,4 @@
-package eu.krzdabrowski.starter.basicfeature.presentation.composable
+package eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -15,21 +15,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import eu.krzdabrowski.starter.basicfeature.R
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsEvent
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsEvent.OpenWebBrowserWithDetails
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RefreshRockets
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RocketClicked
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsViewModel
-import eu.krzdabrowski.starter.basicfeature.presentation.model.RocketDisplayable
-import eu.krzdabrowski.starter.core.utils.collectWithLifecycle
-import kotlinx.coroutines.flow.Flow
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsIntent.RefreshRockets
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rockets.RocketsIntent.RocketClicked
 
 @Composable
 fun RocketsRoute(
