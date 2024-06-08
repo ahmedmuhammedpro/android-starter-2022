@@ -24,6 +24,9 @@ Use swipe-down gesture to refresh downloaded data.
 
 Supports light/dark mode theming automatically.
 
+Sscreens
+![Screenshot_20240609_014700](https://github.com/ahmedmuhammedpro/android-starter-2022/assets/59180483/af227bee-3fa0-469d-ae5a-dd87e49295f9)
+![Uploading Screenshot_20240609_014724.png…]()
 
 ### **Libraries/concepts used**
 
