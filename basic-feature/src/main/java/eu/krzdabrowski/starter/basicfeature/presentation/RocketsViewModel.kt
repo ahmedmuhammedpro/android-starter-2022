@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import eu.krzdabrowski.starter.basicfeature.domain.usecase.GetRocketsUseCase
 import eu.krzdabrowski.starter.basicfeature.domain.usecase.RefreshRocketsUseCase
-import eu.krzdabrowski.starter.basicfeature.presentation.RocketsEvent.OpenWebBrowserWithDetails
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RefreshRockets
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsIntent.RocketClicked
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState.PartialState
@@ -12,6 +11,9 @@ import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState.PartialS
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState.PartialState.Fetched
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState.PartialState.Loading
 import eu.krzdabrowski.starter.basicfeature.presentation.mapper.toPresentationModel
+import eu.krzdabrowski.starter.core.navigation.NavigationCommand
+import eu.krzdabrowski.starter.core.navigation.NavigationDestination
+import eu.krzdabrowski.starter.core.navigation.NavigationManager
 import eu.krzdabrowski.starter.core.presentation.mvi.BaseViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -26,6 +28,7 @@ private const val HTTPS_PREFIX = "https"
 class RocketsViewModel @Inject constructor(
     private val getRocketsUseCase: GetRocketsUseCase,
     private val refreshRocketsUseCase: RefreshRocketsUseCase,
+    private val navigationManager: NavigationManager,
     savedStateHandle: SavedStateHandle,
     rocketsInitialState: RocketsUiState,
 ) : BaseViewModel<RocketsUiState, PartialState, RocketsEvent, RocketsIntent>(
@@ -38,7 +41,7 @@ class RocketsViewModel @Inject constructor(
 
     override fun mapIntents(intent: RocketsIntent): Flow<PartialState> = when (intent) {
         is RefreshRockets -> refreshRockets()
-        is RocketClicked -> rocketClicked(intent.uri)
+        is RocketClicked -> rocketClicked(intent.index)
     }
 
     override fun reduceUiState(
@@ -49,11 +52,13 @@ class RocketsViewModel @Inject constructor(
             isLoading = true,
             isError = false,
         )
+
         is Fetched -> previousState.copy(
             isLoading = false,
             rockets = partialState.list,
             isError = false,
         )
+
         is Error -> previousState.copy(
             isLoading = false,
             isError = true,
@@ -86,9 +91,13 @@ class RocketsViewModel @Inject constructor(
         emit(Loading)
     }
 
-    private fun rocketClicked(uri: String): Flow<PartialState> = flow {
-        if (uri.startsWith(HTTP_PREFIX) || uri.startsWith(HTTPS_PREFIX)) {
-            setEvent(OpenWebBrowserWithDetails(uri))
-        }
+    private fun rocketClicked(index: Int): Flow<PartialState> = flow {
+        val rocket = uiState.value.rockets[index]
+        navigationManager.navigate(
+            object : NavigationCommand {
+                override val destination =
+                    "${NavigationDestination.RocketDetails.route}/${rocket.id}"
+            }
+        )
     }
 }

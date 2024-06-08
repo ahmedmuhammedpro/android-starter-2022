@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class RocketDisplayable(
     val id: String,
     val name: String,
+    val country: String,
     val costPerLaunchInMillions: Int,
     val firstFlightDate: String,
     val heightInMeters: Int,

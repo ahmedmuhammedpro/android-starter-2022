@@ -4,15 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import eu.krzdabrowski.starter.core.R
@@ -38,9 +45,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidStarterTheme {
                 val navController = rememberNavController()
+                val backStackEntry by navController.currentBackStackEntryAsState()
+                val showBackButton =
+                    backStackEntry?.destination?.route != NavigationDestination.Rockets.route
 
                 Scaffold(
-                    topBar = { MainTopAppBar() },
+                    topBar = {
+                        MainTopAppBar(showBackButton) {
+                            navigationManager.navigateBack()
+                        }
+                    }
                 ) {
                     NavigationHost(
                         modifier = Modifier
@@ -66,13 +80,27 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainTopAppBar() {
+private fun MainTopAppBar(
+    showBackButton: Boolean = false,
+    onBackClicked: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
                 text = stringResource(id = R.string.app_name),
                 fontWeight = FontWeight.Medium,
             )
+        },
+        navigationIcon = {
+            if (showBackButton) {
+                IconButton(onClick = onBackClicked) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        tint = Color.White,
+                        contentDescription = "back"
+                    )
+                }
+            }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,

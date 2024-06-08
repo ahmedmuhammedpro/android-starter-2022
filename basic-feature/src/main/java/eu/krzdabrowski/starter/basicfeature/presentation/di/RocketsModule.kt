@@ -7,8 +7,10 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rocketdetails.RocketDetailsNavigationFactory
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsNavigationFactory
 import eu.krzdabrowski.starter.basicfeature.presentation.RocketsUiState
+import eu.krzdabrowski.starter.basicfeature.presentation.composable.rocketdetails.RocketDetailsUiState
 import eu.krzdabrowski.starter.core.navigation.NavigationFactory
 import javax.inject.Singleton
 
@@ -18,6 +20,9 @@ internal object RocketsViewModelModule {
 
     @Provides
     fun provideInitialRocketsUiState(): RocketsUiState = RocketsUiState()
+
+    @Provides
+    fun provideInitialRocketDetailsUiState(): RocketDetailsUiState = RocketDetailsUiState()
 }
 
 @Module
@@ -28,4 +33,9 @@ internal interface RocketsSingletonModule {
     @Binds
     @IntoSet
     fun bindRocketsNavigationFactory(factory: RocketsNavigationFactory): NavigationFactory
+
+    @Singleton
+    @Binds
+    @IntoSet
+    fun bindRocketDetailsNavigationFactory(factory: RocketDetailsNavigationFactory): NavigationFactory
 }
